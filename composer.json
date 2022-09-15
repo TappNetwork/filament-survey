@@ -1,0 +1,40 @@
+{
+    "name": "tapp/filament-survey",
+    "description": "Filament Laravel Survey plugin.",
+    "keywords": [
+        "tapp network",
+        "filament",
+        "laravel",
+        "survey"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/TappNetwork/filament-survey",
+    "support": {
+        "issues": "https://github.com/TappNetwork/filament-survey/issues",
+        "source": "https://github.com/TappNetwork/filament-survey"
+    },
+    "require": {
+        "php": "^8.0",
+        "filament/filament": "^2.0",
+        "filament/notifications": "^2.0",
+        "maatwebsite/excel": "^3.1",
+        "spatie/laravel-package-tools": "^1.12.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tapp\\FilamentSurvey\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tapp\\FilamentSurvey\\FilamentSurveyServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
