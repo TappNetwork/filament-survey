@@ -61,6 +61,9 @@ class QuestionResource extends Resource
                     ->required()
                     ->reactive()
                     ->options(config('survey.question.types')),
+                Forms\Components\TextInput::make('order')
+                    ->numeric()
+                    ->required(),
                 Forms\Components\TagsInput::make('options')
                     ->placeholder('New option')
                     ->helperText("Used for radio and multiselect types. Eg: ['Yes', 'No']")
@@ -83,6 +86,7 @@ class QuestionResource extends Resource
                 Tables\Columns\TextColumn::make('section.name'),
                 Tables\Columns\TextColumn::make('content'),
                 Tables\Columns\TextColumn::make('type'),
+                Tables\Columns\TextColumn::make('order'),
                 Tables\Columns\TagsColumn::make('options'),
                 Tables\Columns\TagsColumn::make('rules'),
                 Tables\Columns\TextColumn::make('created_at')
