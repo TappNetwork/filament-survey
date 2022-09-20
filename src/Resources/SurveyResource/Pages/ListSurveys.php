@@ -16,11 +16,13 @@ class ListSurveys extends ListRecords
 
     protected function getActions(): array
     {
-        return [
+        $actions = parent::getActions();
+
+        return array_merge($actions, [
             Action::make(__('Export Answers'))
-                ->icon('heroicon-s-download')
+                ->icon(config('filament-survey.actions.survey.export.icon'))
                 ->action('export'),
-        ];
+        ]);
     }
 
     public function export()

@@ -38,4 +38,12 @@ return [
         ],
     ],
 
+    'actions' => [
+        'survey' => [
+            'export' => [
+                'icon' => 'heroicon-s-download',
+            ],
+        ],
+    ],
+
 ];
