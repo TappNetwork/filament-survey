@@ -10,4 +10,11 @@ class EditSurvey extends EditRecord
     use EditRecord\Concerns\Translatable;
 
     protected static string $resource = SurveyResource::class;
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+            SurveyResource\Widgets\Questions::class,
+        ];
+    }
 }

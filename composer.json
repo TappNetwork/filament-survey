@@ -18,6 +18,7 @@
         "filament/filament": "^2.0",
         "filament/notifications": "^2.0",
         "maatwebsite/excel": "^3.1",
+        "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-package-tools": "^1.12.1"
     },
     "autoload": {

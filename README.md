@@ -11,6 +11,7 @@ This package provides Filament resources for [Laravel Survey](https://github.com
 ## Dependencies
 - [maatwebsite/excel](https://github.com/SpartnerNL/Laravel-Excel)
 - [matt-daneshvar/laravel-survey](https://github.com/matt-daneshvar/laravel-survey)
+- [spatie/eloquent-sortable](https://github.com/spatie/eloquent-sortable)
 
 ## Installation
 
