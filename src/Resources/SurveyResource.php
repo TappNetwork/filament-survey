@@ -14,6 +14,7 @@ use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 use Tapp\FilamentSurvey\Resources\QuestionResource\Pages as QuestionPages;
 use Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers;
+use Tapp\FilamentSurvey\Resources\SurveyResource\Widgets\Questions;
 
 class SurveyResource extends Resource
 {
@@ -100,6 +101,13 @@ class SurveyResource extends Resource
             'create' => Pages\CreateSurvey::route('/create'),
             'create-question' => QuestionPages\CreateQuestion::route('/{survey_id}/create'),
             'edit' => Pages\EditSurvey::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            Questions::class,
         ];
     }
 }
