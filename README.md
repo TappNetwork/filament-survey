@@ -34,19 +34,6 @@ composer require tapp/filament-survey:"^3.0"
 > **Note** 
 > For **Filament 2.x** check the **[2.x](https://github.com//TappNetwork/filament-survey/tree/2.x)** branch
 
-Publish the migrations with:
-
-```bash
-php artisan vendor:publish --tag="filament-survey-migrations"
-```
-
-Run migrations:
-
-```bash
-php artisan migrate
-```
-
-
 You can publish the view file with:
 
 ```bash
