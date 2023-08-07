@@ -18,7 +18,7 @@ This package provides Filament resources for [Laravel Survey](https://github.com
 You can install the plugin via composer:
 
 ```bash
-composer require tapp/filament-survey
+composer require tapp/filament-survey:"^2.0"
 ```
 
 You can publish the view file with:
