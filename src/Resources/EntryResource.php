@@ -2,9 +2,9 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use MattDaneshvar\Survey\Models\Entry;
 use Tapp\FilamentSurvey\Resources\EntryResource\Pages;
@@ -13,17 +13,17 @@ class EntryResource extends Resource
 {
     protected static ?string $model = Entry::class;
 
-    protected static function getNavigationIcon(): string
+    public static function getNavigationIcon(): string
     {
         return config('filament-survey.navigation.entry.icon');
     }
 
-    protected static function getNavigationSort(): ?int
+    public static function getNavigationSort(): ?int
     {
         return config('filament-survey.navigation.entry.sort');
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return __('filament-survey::filament-survey.navigation.group');
     }

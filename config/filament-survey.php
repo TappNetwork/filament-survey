@@ -18,11 +18,11 @@ return [
     'navigation' => [
         'answer' => [
             'sort' => 4,
-            'icon' => 'heroicon-o-reply',
+            'icon' => 'heroicon-o-arrow-uturn-left',
         ],
         'entry' => [
             'sort' => 5,
-            'icon' => 'heroicon-o-view-list',
+            'icon' => 'heroicon-o-bars-4',
         ],
         'question' => [
             'sort' => 3,
@@ -34,15 +34,24 @@ return [
         ],
         'survey' => [
             'sort' => 1,
-            'icon' => 'heroicon-o-collection',
+            'icon' => 'heroicon-o-rectangle-stack',
         ],
     ],
 
     'actions' => [
         'survey' => [
             'export' => [
-                'icon' => 'heroicon-s-download',
+                'icon' => 'heroicon-s-arrow-down-tray',
             ],
+        ],
+    ],
+
+    'question' => [
+        'types' => [
+            'text' => 'Text',
+            'number' => 'Number',
+            'radio' => 'Radio',
+            'multiselect' => 'Multiselect',
         ],
     ],
 

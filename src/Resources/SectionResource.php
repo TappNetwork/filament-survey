@@ -4,12 +4,11 @@ namespace Tapp\FilamentSurvey\Resources;
 
 use Filament\Forms;
 use Filament\Resources\Concerns\Translatable;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use MattDaneshvar\Survey\Models\Section;
-use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 use Tapp\FilamentSurvey\Resources\SectionResource\Pages;
 
 class SectionResource extends Resource
@@ -18,17 +17,17 @@ class SectionResource extends Resource
 
     protected static ?string $model = Section::class;
 
-    protected static function getNavigationIcon(): string
+    public static function getNavigationIcon(): string
     {
         return config('filament-survey.navigation.section.icon');
     }
 
-    protected static function getNavigationSort(): ?int
+    public static function getNavigationSort(): ?int
     {
         return config('filament-survey.navigation.section.sort');
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return __('filament-survey::filament-survey.navigation.group');
     }
@@ -54,8 +53,8 @@ class SectionResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required(),
-                Forms\Components\BelongsToSelect::make('survey_id')
-                    ->relationship('survey', 'name'),
+                Forms\Components\Select::make('survey_id')
+                    ->relationship('survey', 'name->en'),
             ]);
     }
 
@@ -89,5 +88,10 @@ class SectionResource extends Resource
             'create' => Pages\CreateSection::route('/create'),
             'edit' => Pages\EditSection::route('/{record}/edit'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return true;
     }
 }

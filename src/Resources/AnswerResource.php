@@ -2,9 +2,9 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use MattDaneshvar\Survey\Models\Answer;
 use Tapp\FilamentSurvey\Resources\AnswerResource\Pages;
@@ -13,17 +13,17 @@ class AnswerResource extends Resource
 {
     protected static ?string $model = Answer::class;
 
-    protected static function getNavigationIcon(): string
+    public static function getNavigationIcon(): string
     {
         return config('filament-survey.navigation.answer.icon');
     }
 
-    protected static function getNavigationSort(): ?int
+    public static function getNavigationSort(): ?int
     {
         return config('filament-survey.navigation.answer.sort');
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return __('filament-survey::filament-survey.navigation.group');
     }

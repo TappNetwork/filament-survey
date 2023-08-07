@@ -2,22 +2,15 @@
 
 namespace Tapp\FilamentSurvey;
 
-use Filament\PluginServiceProvider;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentSurveyServiceProvider extends PluginServiceProvider
+class FilamentSurveyServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'filament-survey';
 
-    protected function getResources(): array
-    {
-        return config('filament-survey.resources');
-    }
-
     public function configurePackage(Package $package): void
     {
-        parent::configurePackage($package);
-
         $package->name('filament-survey')
             ->hasConfigFile('filament-survey')
             ->hasViews('filament-survey')

@@ -4,13 +4,13 @@ namespace Tapp\FilamentSurvey\Resources;
 
 use Filament\Forms;
 use Filament\Resources\Concerns\Translatable;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
-use Filament\Tables\Actions\LinkAction;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Enums\ActionsPosition;
 use MattDaneshvar\Survey\Models\Survey;
-use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 use Tapp\FilamentSurvey\Resources\QuestionResource\Pages as QuestionPages;
 use Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers;
@@ -22,17 +22,17 @@ class SurveyResource extends Resource
 
     protected static ?string $model = Survey::class;
 
-    protected static function getNavigationIcon(): string
+    public static function getNavigationIcon(): string
     {
         return config('filament-survey.navigation.survey.icon');
     }
 
-    protected static function getNavigationSort(): ?int
+    public static function getNavigationSort(): ?int
     {
         return config('filament-survey.navigation.survey.sort');
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return __('filament-survey::filament-survey.navigation.group');
     }
@@ -77,11 +77,11 @@ class SurveyResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
             ])
-            ->prependActions([
-                LinkAction::make('CreateQuestion')
-                    ->url(fn (Survey $record): string => route('filament.resources.surveys.create-question', $record->id))
+            ->actions([
+                Action::make('CreateQuestion')
+                    ->url(fn (Survey $record): string => route('filament.admin.resources.surveys.create-question', $record->id))
                     ->color('success'),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->filters([
                 //
             ]);

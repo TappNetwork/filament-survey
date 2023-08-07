@@ -2,13 +2,14 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
-use Closure;
 use Filament\Forms;
 use Filament\Resources\Concerns\Translatable;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component as Livewire;
 use MattDaneshvar\Survey\Models\Question;
 use MattDaneshvar\Survey\Models\Section;
@@ -21,17 +22,17 @@ class QuestionResource extends Resource
 
     protected static ?string $model = Question::class;
 
-    protected static function getNavigationIcon(): string
+    public static function getNavigationIcon(): string
     {
         return config('filament-survey.navigation.question.icon');
     }
 
-    protected static function getNavigationSort(): ?int
+    public static function getNavigationSort(): ?int
     {
         return config('filament-survey.navigation.question.sort');
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return __('filament-survey::filament-survey.navigation.group');
     }
@@ -60,19 +61,19 @@ class QuestionResource extends Resource
                 Forms\Components\Select::make('type')
                     ->required()
                     ->reactive()
-                    ->options(config('survey.question.types')),
+                    ->options(config('filament-survey.question.types')),
                 Forms\Components\TextInput::make('order')
                     ->numeric()
                     ->required(),
                 Forms\Components\TagsInput::make('options')
                     ->placeholder('New option')
                     ->helperText("Used for radio and multiselect types. Eg: ['Yes', 'No']")
-                    ->visible(fn (Closure $get) => $get('type') == 'radio' || $get('type') == 'multiselect'),
+                    ->visible(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect'),
                 Forms\Components\TagsInput::make('rules')
                     ->placeholder('New rule')
                     ->helperText("Validation rules. Eg: ['numeric', 'min:2', 'required']"),
                 Forms\Components\Select::make('section_id')->label('Section')
-                    ->options(fn (Livewire $livewire) => ! empty($livewire->survey_id) ? Section::where('survey_id', $livewire->survey_id)->pluck('name', 'id') : [])
+                    ->options(fn (Livewire $livewire, ?Model $record) => ! empty($livewire->survey_id) ? Section::where('survey_id', $livewire->survey_id)->pluck('name', 'id') : ($record ? Section::where('id', $record->section_id)->pluck('name', 'id') : []))
                     ->helperText('To be available here, a survey should be added first on section.'),
             ]);
     }
