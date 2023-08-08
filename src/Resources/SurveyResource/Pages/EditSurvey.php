@@ -2,6 +2,7 @@
 
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 
+use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Tapp\FilamentSurvey\Resources\SurveyResource;
 
@@ -15,6 +16,13 @@ class EditSurvey extends EditRecord
     {
         return [
             SurveyResource\Widgets\Questions::class,
+        ];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\LocaleSwitcher::make(),
         ];
     }
 }

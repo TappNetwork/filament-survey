@@ -2,6 +2,7 @@
 
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 
+use Filament\Actions;
 use Tapp\FilamentSurvey\Jobs\SendExportSurveys;
 use Filament\Notifications\Notification;
 use Filament\Pages\Actions\Action;
@@ -39,6 +40,15 @@ class ListSurveys extends ListRecords
     {
         return [
             //
+        ];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('create')
+                ->url(SurveyResource::getUrl('create')),
+            Actions\LocaleSwitcher::make(),
         ];
     }
 }
