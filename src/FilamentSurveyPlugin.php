@@ -14,7 +14,7 @@ class FilamentSurveyPlugin implements Plugin
 
     public function getId(): string
     {
-        return 'blog';
+        return 'filament-survey';
     }
 
     public function register(Panel $panel): void
