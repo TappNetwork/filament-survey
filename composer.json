@@ -29,7 +29,6 @@
         "php": "^8.1",
         "filament/filament": "^3.0-stable",
         "filament/spatie-laravel-translatable-plugin": "^3.0-stable",
-        "matt-daneshvar/laravel-survey": "dev-translatable",
         "maatwebsite/excel": "^3.1",
         "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-package-tools": "^1.9"
@@ -37,12 +36,6 @@
     "require-dev": {
         "doctrine/dbal": "^3.6"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/TappNetwork/laravel-survey"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Tapp\\FilamentSurvey\\": "src"
