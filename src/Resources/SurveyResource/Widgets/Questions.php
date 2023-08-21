@@ -12,7 +12,7 @@ class Questions extends BaseWidget
 {
     public ?Model $record = null;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     protected function getTableQuery(): Builder
     {
