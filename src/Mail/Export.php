@@ -12,7 +12,9 @@ class Export extends Mailable
     use SerializesModels;
 
     public $attachment;
+
     public $filename;
+
     public $subject;
 
     /**

@@ -15,17 +15,50 @@ This package provides Filament resources for [Laravel Survey](https://github.com
 
 ## Installation
 
-This plugin uses [Spatie translatable](https://spatie.be/docs/laravel-translatable/v6/installation-setup), [Spatie translatable plugin](https://filamentphp.com/plugins/filament-spatie-translatable), and [Laravel Excel](https://github.com/SpartnerNL/Laravel-Excel), and [Eloquent Sortable](https://github.com/spatie/eloquent-sortable) packages.
+### Installing required packages
 
-First install and configure these packages, then proceed to the plugin installation instructions below.
+This plugin uses [Spatie translatable](https://spatie.be/docs/laravel-translatable/v6/installation-setup), [Spatie translatable plugin](https://filamentphp.com/plugins/filament-spatie-translatable), [Laravel Excel](https://github.com/SpartnerNL/Laravel-Excel), and [Eloquent Sortable](https://github.com/spatie/eloquent-sortable) packages.
 
-> **Note** 
-> It also uses a modifed version of [Laravel Survey](https://github.com/matt-daneshvar/laravel-survey):
-> https://github.com/tappnetwork/laravel-survey/tree/translatable that adds translatable and sortable fields to the survey models.
-> More details in this PR: https://github.com/matt-daneshvar/laravel-survey/pull/39
+First install and configure these packages.
 
+It also uses a modified version of [Laravel Survey](https://github.com/matt-daneshvar/laravel-survey) package. Please refer to the installation instructions below.
 
-You can install the plugin via Composer:
+### Installing Laravel Survey package
+
+This plugin uses a modifed version of Laravel Survey: https://github.com/tappnetwork/laravel-survey/tree/translatable that adds translatable and sortable fields to the survey models. More details in this PR: [matt-daneshvar/laravel-survey#39](https://github.com/matt-daneshvar/laravel-survey/pull/39).
+
+So you must install this version instead of requiring `matt-daneshvar/laravel-survey`. In order to do so, add to your project's `composer.json`:
+
+```json
+"require": {
+    ...
+    "matt-daneshvar/laravel-survey": "dev-translatable",
+},
+
+"repositories": [
+    ...
+    {
+        "type": "vcs",
+        "url": "https://github.com/TappNetwork/laravel-survey"
+    }
+],
+```
+
+Publish the package migrations
+
+```bash
+php artisan vendor:publish --provider="MattDaneshvar\Survey\SurveyServiceProvider" --tag="migrations"
+```
+
+Run the migrations
+
+```bash
+php artisan migrate
+```
+
+### Installing Filament Survey plugin
+
+Install the plugin via Composer:
 
 ```bash
 composer require tapp/filament-survey:"^3.0"
