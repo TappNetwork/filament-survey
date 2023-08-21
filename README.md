@@ -29,7 +29,7 @@ This plugin uses a modifed version of Laravel Survey: https://github.com/tappnet
 
 So you must install this version instead of requiring `matt-daneshvar/laravel-survey`. In order to do so, add to your project's `composer.json`:
 
-```json
+```php
 "require": {
     ...
     "matt-daneshvar/laravel-survey": "dev-translatable",
