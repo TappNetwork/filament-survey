@@ -22,7 +22,7 @@ This plugin uses a modifed version of [Laravel Survey](https://github.com/matt-d
 
 So you must install this version instead of requiring `matt-daneshvar/laravel-survey`. In order to do so, add to your project's `composer.json`:
 
-```json
+```php
 "require": {
     ...
     "matt-daneshvar/laravel-survey": "dev-translatable",
@@ -88,8 +88,8 @@ php artisan vendor:publish --tag="filament-survey-config"
 
 ### Adding the plugin to a panel
 
-Add this plugin to a panel on `plugins()` method (e.g. in  `app/Providers/Filament/AdminPanelProvider.php`).
-This plugin requires the Spatie Translatable plugin, so it should also be added on a panel like so:
+Add this plugin to a panel on `plugins()` method (e.g. in `app/Providers/Filament/AdminPanelProvider.php`).
+This plugin requires the [Spatie Translatable plugin](https://filamentphp.com/plugins/filament-spatie-translatable), so it should also be added on a panel like so:
 
 ```php
 use Filament\SpatieLaravelTranslatablePlugin;
