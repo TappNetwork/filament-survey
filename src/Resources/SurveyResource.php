@@ -67,9 +67,6 @@ class SurveyResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name (English)'),
-                Tables\Columns\TextColumn::make('name_en_es')
-                    ->label(__('Name (En, Es)'))
-                    ->formatStateUsing(fn (Survey $record): string => implode(', ', $record->getTranslations('name'))),
                 Tables\Columns\TextColumn::make('settings'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
