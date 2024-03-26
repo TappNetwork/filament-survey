@@ -8,7 +8,9 @@ use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Enums\ActionsPosition;
+use Filament\Forms\Get;
 use Filament\Tables\Table;
 use MattDaneshvar\Survey\Models\Survey;
 use Tapp\FilamentSurvey\Resources\QuestionResource\Pages as QuestionPages;
@@ -57,8 +59,22 @@ class SurveyResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required(),
-                Forms\Components\TextInput::make('settings'),
-            ]);
+                Forms\Components\Checkbox::make('limit')
+                    ->label('Limit entries per participant?')
+                    ->live()
+                    ->inline(false),
+                Forms\Components\TextInput::make('limit_per_participant')
+                    ->default(1)
+                    ->visible(function (Get $get) {
+                        return $get('limit');
+                    })
+                    ->minValue(1)
+                    ->numeric(),
+                Forms\Components\Checkbox::make('allow_guests')
+                    ->label('Allow guest users to respond to survey?')
+                    ->inline(false),
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -66,7 +82,9 @@ class SurveyResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name (English)'),
+                    ->label('Name (English)')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('settings'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
@@ -77,7 +95,8 @@ class SurveyResource extends Resource
                 Action::make('CreateQuestion')
                     ->url(fn (Survey $record): string => route('filament.admin.resources.surveys.create-question', $record->id))
                     ->color('success'),
-            ], position: ActionsPosition::BeforeColumns)
+                DeleteAction::make(),
+            ])
             ->filters([
                 //
             ]);

@@ -3,6 +3,7 @@
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 
 use Filament\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
@@ -20,6 +21,7 @@ class ListSurveys extends ListRecords
         $actions = parent::getActions();
 
         return array_merge($actions, [
+            DeleteAction::make(),
             Action::make(__('Export Answers'))
                 ->icon(config('filament-survey.actions.survey.export.icon'))
                 ->action('export'),

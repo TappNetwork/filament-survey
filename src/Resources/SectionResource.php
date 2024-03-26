@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 use MattDaneshvar\Survey\Models\Section;
 use Tapp\FilamentSurvey\Resources\SectionResource\Pages;
@@ -68,6 +69,9 @@ class SectionResource extends Resource
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
+            ])
+            ->actions([
+                DeleteAction::make(),
             ])
             ->filters([
                 //
