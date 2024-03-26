@@ -8,15 +8,11 @@ use Filament\Forms\Get;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\Action;
 use MattDaneshvar\Survey\Models\Survey;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Enums\ActionsPosition;
 use Filament\Resources\Concerns\Translatable;
 use Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
-use Tapp\FilamentSurvey\Resources\SurveyResource\Widgets\Questions;
 use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\QuestionsRelationManager;
-use Tapp\FilamentSurvey\Resources\QuestionResource\Pages as QuestionPages;
 use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\SectionsRelationManager;
 
 class SurveyResource extends Resource
@@ -103,8 +99,8 @@ class SurveyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            QuestionsRelationManager::class,
             SectionsRelationManager::class,
+            QuestionsRelationManager::class,
         ];
     }
 
@@ -114,13 +110,6 @@ class SurveyResource extends Resource
             'index' => Pages\ListSurveys::route('/'),
             'create' => Pages\CreateSurvey::route('/create'),
             'edit' => Pages\EditSurvey::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getWidgets(): array
-    {
-        return [
-            Questions::class,
         ];
     }
 }

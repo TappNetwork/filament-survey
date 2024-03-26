@@ -7,13 +7,11 @@ use Filament\Tables;
 use Filament\Forms\Get;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Livewire\Component as Livewire;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\RelationManagers\Concerns\Translatable;
-use MattDaneshvar\Survey\Models\Question;
 use MattDaneshvar\Survey\Models\Section;
 
 class QuestionsRelationManager extends RelationManager
@@ -47,8 +45,7 @@ class QuestionsRelationManager extends RelationManager
                     ->placeholder('New rule')
                     ->helperText("Validation rules. Eg: 'numeric', 'min:2', 'required'. Press Enter after each rule. see https://laravel.com/docs/11.x/validation#available-validation-rules for a full list of available rules"),
                 Forms\Components\Select::make('section_id')->label('Section')
-                    ->options(fn () => Section::where('survey_id', $this->getOwnerRecord()->id)->pluck('name', 'id'))
-                    ->helperText('To be available here, a survey should be added first on section.'),
+                    ->options(fn () => Section::where('survey_id', $this->getOwnerRecord()->id)->pluck('name', 'id')),
             ]);
     }
  

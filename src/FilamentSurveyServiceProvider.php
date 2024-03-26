@@ -20,7 +20,5 @@ class FilamentSurveyServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         parent::packageBooted();
-
-        //
     }
 }
