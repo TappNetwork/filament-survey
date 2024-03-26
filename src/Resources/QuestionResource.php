@@ -57,21 +57,20 @@ class QuestionResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('content')
+                    ->label('Question')
                     ->required(),
                 Forms\Components\Select::make('type')
                     ->required()
                     ->reactive()
                     ->options(config('filament-survey.question.types')),
-                Forms\Components\TextInput::make('order')
-                    ->numeric()
-                    ->required(),
                 Forms\Components\TagsInput::make('options')
                     ->placeholder('New option')
-                    ->helperText("Used for radio and multiselect types. Eg: ['Yes', 'No']")
+                    ->helperText("Used for radio and multiselect types. Press enter after each option")
+                    ->required(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect')
                     ->visible(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect'),
                 Forms\Components\TagsInput::make('rules')
                     ->placeholder('New rule')
-                    ->helperText("Validation rules. Eg: ['numeric', 'min:2', 'required']"),
+                    ->helperText("Validation rules. Eg: 'numeric', 'min:2', 'required'. Press Enter after each rule. see https://laravel.com/docs/11.x/validation#available-validation-rules for a full list of available rules"),
                 Forms\Components\Select::make('section_id')->label('Section')
                     ->options(fn (Livewire $livewire, ?Model $record) => ! empty($livewire->survey_id) ? Section::where('survey_id', $livewire->survey_id)->pluck('name', 'id') : ($record ? Section::where('id', $record->section_id)->pluck('name', 'id') : []))
                     ->helperText('To be available here, a survey should be added first on section.'),

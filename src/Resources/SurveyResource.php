@@ -3,19 +3,20 @@
 namespace Tapp\FilamentSurvey\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Get;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
+use MattDaneshvar\Survey\Models\Survey;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Enums\ActionsPosition;
-use Filament\Forms\Get;
-use Filament\Tables\Table;
-use MattDaneshvar\Survey\Models\Survey;
-use Tapp\FilamentSurvey\Resources\QuestionResource\Pages as QuestionPages;
+use Filament\Resources\Concerns\Translatable;
 use Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 use Tapp\FilamentSurvey\Resources\SurveyResource\Widgets\Questions;
+use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\QuestionsRelationManager;
+use Tapp\FilamentSurvey\Resources\QuestionResource\Pages as QuestionPages;
 
 class SurveyResource extends Resource
 {
@@ -85,16 +86,12 @@ class SurveyResource extends Resource
                     ->label('Name (English)')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('settings'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
             ])
             ->actions([
-                Action::make('CreateQuestion')
-                    ->url(fn (Survey $record): string => route('filament.admin.resources.surveys.create-question', $record->id))
-                    ->color('success'),
                 DeleteAction::make(),
             ])
             ->filters([
@@ -105,7 +102,7 @@ class SurveyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            QuestionsRelationManager::class,
         ];
     }
 
@@ -114,7 +111,6 @@ class SurveyResource extends Resource
         return [
             'index' => Pages\ListSurveys::route('/'),
             'create' => Pages\CreateSurvey::route('/create'),
-            'create-question' => QuestionPages\CreateQuestion::route('/{survey_id}/create'),
             'edit' => Pages\EditSurvey::route('/{record}/edit'),
         ];
     }
