@@ -5,8 +5,6 @@ return [
     'resources' => [
         'AnswerResource' => \Tapp\FilamentSurvey\Resources\AnswerResource::class,
         'EntryResource' => \Tapp\FilamentSurvey\Resources\EntryResource::class,
-        'QuestionResource' => \Tapp\FilamentSurvey\Resources\QuestionResource::class,
-        'SectionResource' => \Tapp\FilamentSurvey\Resources\SectionResource::class,
         'SurveyResource' => \Tapp\FilamentSurvey\Resources\SurveyResource::class,
     ],
 
