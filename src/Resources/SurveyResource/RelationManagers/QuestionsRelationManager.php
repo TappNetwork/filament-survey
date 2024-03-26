@@ -76,6 +76,7 @@ class QuestionsRelationManager extends RelationManager
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->defaultSort('order');
+            ->defaultSort('order')
+            ->reorderable('order');
     }
 }
