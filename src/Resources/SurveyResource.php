@@ -17,6 +17,7 @@ use Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 use Tapp\FilamentSurvey\Resources\SurveyResource\Widgets\Questions;
 use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\QuestionsRelationManager;
 use Tapp\FilamentSurvey\Resources\QuestionResource\Pages as QuestionPages;
+use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\SectionsRelationManager;
 
 class SurveyResource extends Resource
 {
@@ -103,6 +104,7 @@ class SurveyResource extends Resource
     {
         return [
             QuestionsRelationManager::class,
+            SectionsRelationManager::class,
         ];
     }
 
