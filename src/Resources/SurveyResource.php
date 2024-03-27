@@ -3,17 +3,22 @@
 namespace Tapp\FilamentSurvey\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Resources\Concerns\Translatable;
-use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
+use Filament\Forms\Get;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkAction;
 use MattDaneshvar\Survey\Models\Survey;
+use Filament\Notifications\Notification;
+use Filament\Tables\Actions\DeleteAction;
+use Illuminate\Database\Eloquent\Collection;
+use Filament\Resources\Concerns\Translatable;
+use Tapp\FilamentSurvey\Jobs\SendExportSurveys;
 use Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
-use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\QuestionsRelationManager;
 use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\SectionsRelationManager;
+use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\QuestionsRelationManager;
 
 class SurveyResource extends Resource
 {
@@ -90,10 +95,52 @@ class SurveyResource extends Resource
             ])
             ->actions([
                 DeleteAction::make(),
+                Action::make(__('Export Answers'))
+                    ->icon(config('filament-survey.actions.survey.export.icon'))
+                    ->action(function (Survey $record) {
+                        SendExportSurveys::dispatch(user: request()->user(), survey: $record);
+
+                        Notification::make()
+                            ->title(__('You will receive your export via email'))
+                            ->success()
+                            ->send();
+                    }),
+            ])
+            ->bulkActions([
+                BulkAction::make('Export Answers')
+                    ->icon(config('filament-survey.actions.survey.export.icon'))
+                    ->action(function (Collection $records) {
+                        SendExportSurveys::dispatch(user: request()->user(), surveys: $records);
+
+                        Notification::make()
+                            ->title(__('You will receive your export via email'))
+                            ->success()
+                            ->send();
+                    }),
             ])
             ->filters([
                 //
             ]);
+    }
+
+    public function export(Survey $survey)
+    {
+        SendExportSurveys::dispatch(user: request()->user(), survey: $survey);
+
+        Notification::make()
+            ->title(__('You will receive your export via email'))
+            ->success()
+            ->send();
+    }
+
+    public function exportBulk(Collection $surveys)
+    {
+        SendExportSurveys::dispatch(user: request()->user(), surveys: $surveys);
+
+        Notification::make()
+            ->title(__('You will receive your export via email'))
+            ->success()
+            ->send();
     }
 
     public static function getRelations(): array
