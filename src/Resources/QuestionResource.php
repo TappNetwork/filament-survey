@@ -7,8 +7,8 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component as Livewire;
@@ -65,7 +65,7 @@ class QuestionResource extends Resource
                     ->options(config('filament-survey.question.types')),
                 Forms\Components\TagsInput::make('options')
                     ->placeholder('New option')
-                    ->helperText("Used for radio and multiselect types. Press enter after each option")
+                    ->helperText('Used for radio and multiselect types. Press enter after each option')
                     ->required(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect')
                     ->visible(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect'),
                 Forms\Components\TagsInput::make('rules')
