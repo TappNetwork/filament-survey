@@ -3,15 +3,15 @@
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Get;
 use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Tables\Actions\EditAction;
+use Filament\Forms\Get;
+use Filament\Resources\RelationManagers\Concerns\Translatable;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Resources\RelationManagers\Concerns\Translatable;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Table;
 use MattDaneshvar\Survey\Models\Section;
 
 class QuestionsRelationManager extends RelationManager
@@ -38,7 +38,7 @@ class QuestionsRelationManager extends RelationManager
                     ->options(config('filament-survey.question.types')),
                 Forms\Components\TagsInput::make('options')
                     ->placeholder('New option')
-                    ->helperText("Used for radio and multiselect types. Press enter after each option")
+                    ->helperText('Used for radio and multiselect types. Press enter after each option')
                     ->required(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect')
                     ->visible(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect'),
                 Forms\Components\TagsInput::make('rules')
@@ -48,7 +48,7 @@ class QuestionsRelationManager extends RelationManager
                     ->options(fn () => Section::where('survey_id', $this->getOwnerRecord()->id)->pluck('name', 'id')),
             ]);
     }
- 
+
     public function table(Table $table): Table
     {
         return $table

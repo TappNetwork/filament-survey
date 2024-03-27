@@ -3,16 +3,14 @@
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Get;
 use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Tables\Actions\EditAction;
+use Filament\Resources\RelationManagers\Concerns\Translatable;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Resources\RelationManagers\Concerns\Translatable;
-use MattDaneshvar\Survey\Models\Section;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Table;
 
 class SectionsRelationManager extends RelationManager
 {
@@ -33,7 +31,7 @@ class SectionsRelationManager extends RelationManager
                     ->required(),
             ]);
     }
- 
+
     public function table(Table $table): Table
     {
         return $table
