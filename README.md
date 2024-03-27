@@ -107,4 +107,4 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-That's it! Now the surveys, sections, questions, answers, and entries resources will be displayed in the left sidebar in your Filament admin panel.
+That's it! Now the surveys, answers, and entries resources will be displayed in the left sidebar in your Filament admin panel. To enable dedicated resources for Sections, and Questions, publish the config and add QuestionResource and SectionResource to the 'resources' array.
