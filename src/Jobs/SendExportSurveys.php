@@ -3,16 +3,16 @@
 namespace Tapp\FilamentSurvey\Jobs;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
-use Tapp\FilamentSurvey\Mail\Export;
-use Illuminate\Queue\SerializesModels;
 use MattDaneshvar\Survey\Models\Survey;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Database\Eloquent\Collection;
 use Tapp\FilamentSurvey\Exports\SurveysExport;
+use Tapp\FilamentSurvey\Mail\Export;
 
 class SendExportSurveys implements ShouldQueue
 {
@@ -24,6 +24,7 @@ class SendExportSurveys implements ShouldQueue
     public $user;
 
     public ?Collection $surveys;
+
     public ?Survey $survey;
 
     /**

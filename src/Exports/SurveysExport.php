@@ -2,20 +2,20 @@
 
 namespace Tapp\FilamentSurvey\Exports;
 
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\WithMapping;
 use Illuminate\Database\Eloquent\Collection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 use MattDaneshvar\Survey\Models\Survey;
-
 
 class SurveysExport implements FromCollection, WithHeadings, WithMapping
 {
     public ?Collection $surveys;
+
     public ?Survey $survey;
 
-    public function __construct(?Collection $surveys = null, Survey $survey = null)
+    public function __construct(?Collection $surveys = null, ?Survey $survey = null)
     {
         $this->surveys = $surveys;
         $this->survey = $survey;
