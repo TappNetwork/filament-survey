@@ -2,25 +2,37 @@
 
 namespace Tapp\FilamentSurvey\Exports;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use MattDaneshvar\Survey\Models\Survey;
 
 class SurveysExport implements FromCollection, WithHeadings, WithMapping
 {
+    public ?Collection $surveys;
+
+    public ?Survey $survey;
+
+    public function __construct(?Collection $surveys = null, ?Survey $survey = null)
+    {
+        $this->surveys = $surveys;
+        $this->survey = $survey;
+    }
+
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return collect(DB::select(DB::raw("
+        $rawExpression = "
             SELECT
                 users.name as user_name,
                 users.email as user_email,
                 JSON_EXTRACT(surveys.name, '$.en') as survey_name,
                 JSON_EXTRACT(questions.content, '$.en') as question_content,
-                JSON_EXTRACT(answers.value, '$.en') as answer_value,
+                answers.value as answer_value,
                 entries.created_at as entry_created_at
             FROM
                 answers
@@ -28,7 +40,21 @@ class SurveysExport implements FromCollection, WithHeadings, WithMapping
                 JOIN entries ON entries.id = answers.entry_id
                 JOIN surveys ON surveys.id = entries.survey_id
                 JOIN users ON users.id = entries.participant_id
-        ")));
+        ";
+
+        if ($this->survey) {
+            $rawExpression = $rawExpression.' where surveys.id = '.$this->survey->id;
+        }
+
+        if ($this->surveys) {
+            $surveyIdsString = implode(', ', $this->surveys->pluck('id')->toArray());
+            $rawExpression = $rawExpression.' where surveys.id In ('.$surveyIdsString.')';
+        }
+
+        $expression = DB::raw($rawExpression)
+            ->getValue(DB::connection()->getQueryGrammar());
+
+        return collect(DB::select($expression));
     }
 
     public function map($survey): array
