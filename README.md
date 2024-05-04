@@ -1,5 +1,9 @@
 # Filament Laravel Survey
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/tapp/filament-survey.svg?style=flat-square)](https://packagist.org/packages/tapp/filament-survey)
+![Code Style Action Status - Pint](https://github.com/TappNetwork/filament-survey/actions/workflows/pint.yml/badge.svg)
+[![Total Downloads](https://img.shields.io/packagist/dt/tapp/filament-survey.svg?style=flat-square)](https://packagist.org/packages/tapp/filament-survey)
+
 A Filament plugin for [Laravel Survey](https://github.com/matt-daneshvar/laravel-survey) package.
 
 This package provides Filament resources for [Laravel Survey](https://github.com/matt-daneshvar/laravel-survey).
