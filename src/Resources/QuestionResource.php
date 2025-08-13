@@ -2,13 +2,21 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TagsColumn;
+use Filament\Actions\DeleteAction;
+use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\ListQuestions;
+use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\CreateQuestion;
+use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\EditQuestion;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component as Livewire;
@@ -52,26 +60,26 @@ class QuestionResource extends Resource
         return array_keys(config('filament-survey.languages'));
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('content')
+        return $schema
+            ->components([
+                TextInput::make('content')
                     ->label('Question')
                     ->required(),
-                Forms\Components\Select::make('type')
+                Select::make('type')
                     ->required()
                     ->reactive()
                     ->options(config('filament-survey.question.types')),
-                Forms\Components\TagsInput::make('options')
+                TagsInput::make('options')
                     ->placeholder('New option')
                     ->helperText('Used for radio and multiselect types. Press enter after each option')
                     ->required(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect')
                     ->visible(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect'),
-                Forms\Components\TagsInput::make('rules')
+                TagsInput::make('rules')
                     ->placeholder('New rule')
                     ->helperText("Validation rules. Eg: 'numeric', 'min:2', 'required'. Press Enter after each rule. see https://laravel.com/docs/11.x/validation#available-validation-rules for a full list of available rules"),
-                Forms\Components\Select::make('section_id')->label('Section')
+                Select::make('section_id')->label('Section')
                     ->options(fn (Livewire $livewire, ?Model $record) => ! empty($livewire->survey_id) ? Section::where('survey_id', $livewire->survey_id)->pluck('name', 'id') : ($record ? Section::where('id', $record->section_id)->pluck('name', 'id') : []))
                     ->helperText('To be available here, a survey should be added first on section.'),
             ]);
@@ -81,20 +89,20 @@ class QuestionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('survey.name')
+                TextColumn::make('survey.name')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('section.name'),
-                Tables\Columns\TextColumn::make('content'),
-                Tables\Columns\TextColumn::make('type'),
-                Tables\Columns\TextColumn::make('order'),
-                Tables\Columns\TagsColumn::make('options'),
-                Tables\Columns\TagsColumn::make('rules'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('section.name'),
+                TextColumn::make('content'),
+                TextColumn::make('type'),
+                TextColumn::make('order'),
+                TagsColumn::make('options'),
+                TagsColumn::make('rules'),
+                TextColumn::make('created_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime(),
             ])
-            ->actions([
+            ->recordActions([
                 DeleteAction::make(),
             ])
             ->filters([
@@ -112,9 +120,9 @@ class QuestionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListQuestions::route('/'),
-            'create' => Pages\CreateQuestion::route('/create'),
-            'edit' => Pages\EditQuestion::route('/{record}/edit'),
+            'index' => ListQuestions::route('/'),
+            'create' => CreateQuestion::route('/create'),
+            'edit' => EditQuestion::route('/{record}/edit'),
         ];
     }
 }

@@ -2,15 +2,19 @@
 
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers;
 
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Actions\CreateAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Resources\RelationManagers\Concerns\Translatable;
+use LaraZeus\SpatieTranslatable\Resources\RelationManagers\Concerns\Translatable;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Actions\CreateAction;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
 use MattDaneshvar\Survey\Models\Section;
 
@@ -25,26 +29,26 @@ class QuestionsRelationManager extends RelationManager
 
     protected static string $relationship = 'questions';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('content')
+        return $schema
+            ->components([
+                TextInput::make('content')
                     ->label('Question')
                     ->required(),
-                Forms\Components\Select::make('type')
+                Select::make('type')
                     ->required()
                     ->reactive()
                     ->options(config('filament-survey.question.types')),
-                Forms\Components\TagsInput::make('options')
+                TagsInput::make('options')
                     ->placeholder('New option')
                     ->helperText('Used for radio and multiselect types. Press enter after each option')
                     ->required(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect')
                     ->visible(fn (Get $get) => $get('type') == 'radio' || $get('type') == 'multiselect'),
-                Forms\Components\TagsInput::make('rules')
+                TagsInput::make('rules')
                     ->placeholder('New rule')
                     ->helperText("Validation rules. Eg: 'numeric', 'min:2', 'required'. Press Enter after each rule. see https://laravel.com/docs/11.x/validation#available-validation-rules for a full list of available rules"),
-                Forms\Components\Select::make('section_id')->label('Section')
+                Select::make('section_id')->label('Section')
                     ->options(fn () => Section::where('survey_id', $this->getOwnerRecord()->id)->pluck('name', 'id')),
             ]);
     }
@@ -56,20 +60,20 @@ class QuestionsRelationManager extends RelationManager
                 CreateAction::make(),
             ])
             ->columns([
-                Tables\Columns\TextColumn::make('content')
+                TextColumn::make('content')
                     ->label('Question')
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('type')
+                TextColumn::make('type')
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('order')
+                TextColumn::make('order')
                     ->toggleable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('section.name'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('section.name'),
+                TextColumn::make('created_at')
                     ->toggleable()
                     ->dateTime(),
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
             ])

@@ -2,7 +2,9 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Tapp\FilamentSurvey\Resources\EntryResource\Pages\ListEntries;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -38,10 +40,10 @@ class EntryResource extends Resource
         return __('filament-survey::filament-survey.navigation.entry.plural-label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 //
             ]);
     }
@@ -50,11 +52,11 @@ class EntryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('survey.name'),
-                Tables\Columns\TextColumn::make('participant.name'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('survey.name'),
+                TextColumn::make('participant.name'),
+                TextColumn::make('created_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime(),
             ])
             ->filters([
@@ -72,7 +74,7 @@ class EntryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEntries::route('/'),
+            'index' => ListEntries::route('/'),
             //'create' => Pages\CreateEntry::route('/create'),
             //'edit' => Pages\EditEntry::route('/{record}/edit'),
         ];

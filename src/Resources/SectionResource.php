@@ -2,12 +2,18 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\DeleteAction;
+use Tapp\FilamentSurvey\Resources\SectionResource\Pages\ListSections;
+use Tapp\FilamentSurvey\Resources\SectionResource\Pages\CreateSection;
+use Tapp\FilamentSurvey\Resources\SectionResource\Pages\EditSection;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 use MattDaneshvar\Survey\Models\Section;
 use Tapp\FilamentSurvey\Resources\SectionResource\Pages;
@@ -48,13 +54,13 @@ class SectionResource extends Resource
         return array_keys(config('filament-survey.languages'));
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->required(),
-                Forms\Components\Select::make('survey_id')
+                Select::make('survey_id')
                     ->relationship('survey', 'name->en'),
             ]);
     }
@@ -63,14 +69,14 @@ class SectionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('survey.name'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('survey.name'),
+                TextColumn::make('name'),
+                TextColumn::make('created_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime(),
             ])
-            ->actions([
+            ->recordActions([
                 DeleteAction::make(),
             ])
             ->filters([
@@ -88,9 +94,9 @@ class SectionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSections::route('/'),
-            'create' => Pages\CreateSection::route('/create'),
-            'edit' => Pages\EditSection::route('/{record}/edit'),
+            'index' => ListSections::route('/'),
+            'create' => CreateSection::route('/create'),
+            'edit' => EditSection::route('/{record}/edit'),
         ];
     }
 

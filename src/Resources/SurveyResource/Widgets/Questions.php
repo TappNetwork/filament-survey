@@ -2,6 +2,7 @@
 
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\Widgets;
 
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,18 +30,18 @@ class Questions extends BaseWidget
     protected function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('section.name')
+            TextColumn::make('section.name')
                 ->toggleable(),
-            Tables\Columns\TextColumn::make('content'),
-            Tables\Columns\TextColumn::make('type')
+            TextColumn::make('content'),
+            TextColumn::make('type')
                 ->toggleable(),
-            Tables\Columns\TextColumn::make('order')
+            TextColumn::make('order')
                 ->toggleable()
                 ->sortable(),
-            Tables\Columns\TextColumn::make('created_at')
+            TextColumn::make('created_at')
                 ->toggleable()
                 ->dateTime(),
-            Tables\Columns\TextColumn::make('updated_at')
+            TextColumn::make('updated_at')
                 ->toggleable()
                 ->dateTime(),
         ];

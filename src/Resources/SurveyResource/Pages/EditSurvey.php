@@ -2,6 +2,8 @@
 
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 
+use LaraZeus\SpatieTranslatable\Resources\Pages\EditRecord\Concerns\Translatable;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -9,14 +11,14 @@ use Tapp\FilamentSurvey\Resources\SurveyResource;
 
 class EditSurvey extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
+    use Translatable;
 
     protected static string $resource = SurveyResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 
