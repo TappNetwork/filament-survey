@@ -2,14 +2,13 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
+use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
-use Tapp\FilamentSurvey\Resources\EntryResource\Pages\ListEntries;
-use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Table;
 use MattDaneshvar\Survey\Models\Entry;
 use Tapp\FilamentSurvey\Resources\EntryResource\Pages;
+use Tapp\FilamentSurvey\Resources\EntryResource\Pages\ListEntries;
 
 class EntryResource extends Resource
 {
@@ -75,8 +74,8 @@ class EntryResource extends Resource
     {
         return [
             'index' => ListEntries::route('/'),
-            //'create' => Pages\CreateEntry::route('/create'),
-            //'edit' => Pages\EditEntry::route('/{record}/edit'),
+            // 'create' => Pages\CreateEntry::route('/create'),
+            // 'edit' => Pages\EditEntry::route('/{record}/edit'),
         ];
     }
 }

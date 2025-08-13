@@ -3,7 +3,6 @@
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\Widgets;
 
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

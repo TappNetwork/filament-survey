@@ -54,7 +54,7 @@ class SendExportSurveys implements ShouldQueue
         } elseif ($this->surveys) {
             $export = Excel::download(new SurveysExport(surveys: $this->surveys), $filename)->getFile();
         } else {
-            $export = Excel::download(new SurveysExport(), $filename)->getFile();
+            $export = Excel::download(new SurveysExport, $filename)->getFile();
         }
 
         $subject = __('Export ready:').' '.$filename;

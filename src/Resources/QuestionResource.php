@@ -2,27 +2,24 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
-use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
+use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\TagsColumn;
-use Filament\Actions\DeleteAction;
-use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\ListQuestions;
-use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\CreateQuestion;
-use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\EditQuestion;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TagsColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use Livewire\Component as Livewire;
 use MattDaneshvar\Survey\Models\Question;
 use MattDaneshvar\Survey\Models\Section;
-use Tapp\FilamentSurvey\Resources\QuestionResource\Pages;
+use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\CreateQuestion;
+use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\EditQuestion;
+use Tapp\FilamentSurvey\Resources\QuestionResource\Pages\ListQuestions;
 
 class QuestionResource extends Resource
 {

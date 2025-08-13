@@ -2,14 +2,13 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
+use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
-use Tapp\FilamentSurvey\Resources\AnswerResource\Pages\ListAnswers;
-use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Table;
 use MattDaneshvar\Survey\Models\Answer;
 use Tapp\FilamentSurvey\Resources\AnswerResource\Pages;
+use Tapp\FilamentSurvey\Resources\AnswerResource\Pages\ListAnswers;
 
 class AnswerResource extends Resource
 {
@@ -77,8 +76,8 @@ class AnswerResource extends Resource
     {
         return [
             'index' => ListAnswers::route('/'),
-            //'create' => Pages\CreateAnswer::route('/create'),
-            //'edit' => Pages\EditAnswer::route('/{record}/edit'),
+            // 'create' => Pages\CreateAnswer::route('/create'),
+            // 'edit' => Pages\EditAnswer::route('/{record}/edit'),
         ];
     }
 }

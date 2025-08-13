@@ -2,21 +2,18 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
-use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\DeleteAction;
-use Tapp\FilamentSurvey\Resources\SectionResource\Pages\ListSections;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
+use MattDaneshvar\Survey\Models\Section;
 use Tapp\FilamentSurvey\Resources\SectionResource\Pages\CreateSection;
 use Tapp\FilamentSurvey\Resources\SectionResource\Pages\EditSection;
-use Filament\Forms;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use MattDaneshvar\Survey\Models\Section;
-use Tapp\FilamentSurvey\Resources\SectionResource\Pages;
+use Tapp\FilamentSurvey\Resources\SectionResource\Pages\ListSections;
 
 class SectionResource extends Resource
 {
