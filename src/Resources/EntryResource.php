@@ -73,8 +73,8 @@ class EntryResource extends Resource
     {
         return [
             'index' => Pages\ListEntries::route('/'),
-            //'create' => Pages\CreateEntry::route('/create'),
-            //'edit' => Pages\EditEntry::route('/{record}/edit'),
+            // 'create' => Pages\CreateEntry::route('/create'),
+            // 'edit' => Pages\EditEntry::route('/{record}/edit'),
         ];
     }
 }

@@ -75,8 +75,8 @@ class AnswerResource extends Resource
     {
         return [
             'index' => Pages\ListAnswers::route('/'),
-            //'create' => Pages\CreateAnswer::route('/create'),
-            //'edit' => Pages\EditAnswer::route('/{record}/edit'),
+            // 'create' => Pages\CreateAnswer::route('/create'),
+            // 'edit' => Pages\EditAnswer::route('/{record}/edit'),
         ];
     }
 }
