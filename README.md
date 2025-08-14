@@ -18,6 +18,14 @@ This package provides Filament resources for [Laravel Survey](https://github.com
 - [matt-daneshvar/laravel-survey](https://github.com/matt-daneshvar/laravel-survey)
 - [spatie/eloquent-sortable](https://github.com/spatie/eloquent-sortable)
 
+### Version Compatibility
+
+ Filament | Filament Survey
+:---------|:---------------
+ 2.x      | 2.x
+ 3.x      | 3.x
+ 4.x      | 4.x
+
 ## Installation
 
 ### Installing the required package (Laravel Survey)
@@ -61,11 +69,24 @@ php artisan migrate
 
 ### Installing the Filament Survey plugin
 
+### Installation
+
+You can install the package via Composer:
+
+#### For Filament 4
+
+> **Note** 
+> For **Filament 4.x** check the **[4.x](https://github.com//TappNetwork/filament-survey/tree/4.x)** branch
+
+#### For Filament 3
+
 Install the plugin via Composer:
 
 ```bash
 composer require tapp/filament-survey:"^3.0"
 ```
+
+#### For Filament 2
 
 > **Note** 
 > For **Filament 2.x** check the **[2.x](https://github.com//TappNetwork/filament-survey/tree/2.x)** branch
