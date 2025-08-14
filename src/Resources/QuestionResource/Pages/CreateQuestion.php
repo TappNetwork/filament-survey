@@ -2,13 +2,14 @@
 
 namespace Tapp\FilamentSurvey\Resources\QuestionResource\Pages;
 
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
+use LaraZeus\SpatieTranslatable\Resources\Pages\CreateRecord\Concerns\Translatable;
 use Tapp\FilamentSurvey\Resources\QuestionResource;
 
 class CreateQuestion extends CreateRecord
 {
-    use CreateRecord\Concerns\Translatable;
+    use Translatable;
 
     protected static string $resource = QuestionResource::class;
 
@@ -24,7 +25,7 @@ class CreateQuestion extends CreateRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }

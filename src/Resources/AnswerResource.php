@@ -2,12 +2,13 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use MattDaneshvar\Survey\Models\Answer;
 use Tapp\FilamentSurvey\Resources\AnswerResource\Pages;
+use Tapp\FilamentSurvey\Resources\AnswerResource\Pages\ListAnswers;
 
 class AnswerResource extends Resource
 {
@@ -38,10 +39,10 @@ class AnswerResource extends Resource
         return __('filament-survey::filament-survey.navigation.answer.plural-label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 //
             ]);
     }
@@ -50,13 +51,13 @@ class AnswerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('question.name'),
-                Tables\Columns\TextColumn::make('entry.participant.name')
+                TextColumn::make('question.name'),
+                TextColumn::make('entry.participant.name')
                     ->label(__('Participant')),
-                Tables\Columns\TextColumn::make('value'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('value'),
+                TextColumn::make('created_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime(),
             ])
             ->filters([
@@ -74,7 +75,7 @@ class AnswerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAnswers::route('/'),
+            'index' => ListAnswers::route('/'),
             // 'create' => Pages\CreateAnswer::route('/create'),
             // 'edit' => Pages\EditAnswer::route('/{record}/edit'),
         ];

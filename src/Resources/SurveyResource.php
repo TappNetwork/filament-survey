@@ -2,21 +2,24 @@
 
 namespace Tapp\FilamentSurvey\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
+use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
+use Filament\Actions\DeleteAction;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\BulkAction;
-use Filament\Tables\Actions\DeleteAction;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use MattDaneshvar\Survey\Models\Survey;
 use Tapp\FilamentSurvey\Jobs\SendExportSurveys;
-use Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
+use Tapp\FilamentSurvey\Resources\SurveyResource\Pages\CreateSurvey;
+use Tapp\FilamentSurvey\Resources\SurveyResource\Pages\EditSurvey;
+use Tapp\FilamentSurvey\Resources\SurveyResource\Pages\ListSurveys;
 use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\QuestionsRelationManager;
 use Tapp\FilamentSurvey\Resources\SurveyResource\RelationManagers\SectionsRelationManager;
 
@@ -56,24 +59,24 @@ class SurveyResource extends Resource
         return array_keys(config('filament-survey.languages'));
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->required(),
-                Forms\Components\Checkbox::make('limit')
+                Checkbox::make('limit')
                     ->label('Limit entries per participant?')
                     ->live()
                     ->inline(false),
-                Forms\Components\TextInput::make('limit_per_participant')
+                TextInput::make('limit_per_participant')
                     ->default(1)
                     ->visible(function (Get $get) {
                         return $get('limit');
                     })
                     ->minValue(1)
                     ->numeric(),
-                Forms\Components\Checkbox::make('allow_guests')
+                Checkbox::make('allow_guests')
                     ->label('Allow guest users to respond to survey?')
                     ->inline(false),
             ])
@@ -84,16 +87,16 @@ class SurveyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Name (English)')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime(),
             ])
-            ->actions([
+            ->recordActions([
                 DeleteAction::make(),
                 Action::make(__('Export Answers'))
                     ->icon(config('filament-survey.actions.survey.export.icon'))
@@ -106,7 +109,7 @@ class SurveyResource extends Resource
                             ->send();
                     }),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkAction::make('Export Answers')
                     ->icon(config('filament-survey.actions.survey.export.icon'))
                     ->action(function (Collection $records) {
@@ -154,9 +157,9 @@ class SurveyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSurveys::route('/'),
-            'create' => Pages\CreateSurvey::route('/create'),
-            'edit' => Pages\EditSurvey::route('/{record}/edit'),
+            'index' => ListSurveys::route('/'),
+            'create' => CreateSurvey::route('/create'),
+            'edit' => EditSurvey::route('/{record}/edit'),
         ];
     }
 }

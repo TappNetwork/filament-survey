@@ -2,17 +2,18 @@
 
 namespace Tapp\FilamentSurvey\Resources\SurveyResource\Pages;
 
-use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
-use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
+use LaraZeus\SpatieTranslatable\Resources\Pages\ListRecords\Concerns\Translatable;
 use Tapp\FilamentSurvey\Jobs\SendExportSurveys;
 use Tapp\FilamentSurvey\Resources\SurveyResource;
 
 class ListSurveys extends ListRecords
 {
-    use ListRecords\Concerns\Translatable;
+    use Translatable;
 
     protected static string $resource = SurveyResource::class;
 
@@ -50,7 +51,7 @@ class ListSurveys extends ListRecords
         return [
             Action::make('create')
                 ->url(SurveyResource::getUrl('create')),
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }
