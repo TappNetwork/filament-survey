@@ -26,15 +26,22 @@
         "source": "https://github.com/TappNetwork/filament-survey"
     },
     "require": {
-        "php": "^8.1",
-        "filament/filament": "^3.0-stable",
-        "filament/spatie-laravel-translatable-plugin": "^3.0-stable",
+        "php": "^8.2 | ^8.3",
+        "filament/filament": "^3.2",
+        "filament/spatie-laravel-translatable-plugin": "^3.2",
+        "illuminate/contracts": "^10.0|^11.0",
         "maatwebsite/excel": "^3.1",
         "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-package-tools": "^1.9"
     },
     "require-dev": {
-        "doctrine/dbal": "^3.6"
+        "doctrine/dbal": "^3.6|^4.0",
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^7.9|^8.1",
+        "orchestra/testbench": "^8.0|^9.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-arch": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -42,13 +49,18 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
                 "Tapp\\FilamentSurvey\\FilamentSurveyServiceProvider"
             ]
+    
         }
     },
     "minimum-stability": "dev",
