@@ -2,6 +2,18 @@
 
 All notable changes to the "Filament Laravel Survey" will be documented in this file.
 
+## v3.2.0 - 2026-05-19
+
+### What's Changed
+
+* feat: Add Support for Filament 3.2+ and Laravel 12 by @latiefdole in https://github.com/TappNetwork/filament-survey/pull/14
+
+### New Contributors
+
+* @latiefdole made their first contribution in https://github.com/TappNetwork/filament-survey/pull/14
+
+**Full Changelog**: https://github.com/TappNetwork/filament-survey/compare/v3.1.1...v3.2.0
+
 ## v3.1.1 - 2025-08-14
 
 ### What's Changed
