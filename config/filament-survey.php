@@ -1,11 +1,15 @@
 <?php
 
+use Tapp\FilamentSurvey\Resources\AnswerResource;
+use Tapp\FilamentSurvey\Resources\EntryResource;
+use Tapp\FilamentSurvey\Resources\SurveyResource;
+
 return [
 
     'resources' => [
-        'AnswerResource' => \Tapp\FilamentSurvey\Resources\AnswerResource::class,
-        'EntryResource' => \Tapp\FilamentSurvey\Resources\EntryResource::class,
-        'SurveyResource' => \Tapp\FilamentSurvey\Resources\SurveyResource::class,
+        'AnswerResource' => AnswerResource::class,
+        'EntryResource' => EntryResource::class,
+        'SurveyResource' => SurveyResource::class,
     ],
 
     'languages' => [
